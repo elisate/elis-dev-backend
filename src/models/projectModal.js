@@ -32,4 +32,4 @@ const projectSchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.model("Project", courseSchema);
+export default mongoose.model("Project", projectSchema);

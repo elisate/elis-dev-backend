@@ -1,5 +1,6 @@
 import { v2 as cloudinary } from "cloudinary";
-import configureMulter from "../config/multerConfig.js";
+// import configureMulter from "../config/multerConfig.js";
+import configureMulter from "../../utils/multer.js";
 import Project from '../models/projectModal.js'
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
