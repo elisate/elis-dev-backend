@@ -88,3 +88,20 @@ export const updateProject = async (req, res) => {
     }
   });
 };
+
+
+// Get all projects
+export const getAllProjects = async (req, res) => {
+  try {
+    // Find all projects in the database
+    const projects = await Project.find();
+
+    if (!projects || projects.length === 0) {
+      return res.status(404).json({ message: "No projects found" });
+    }
+
+    res.status(200).json(projects); // Respond with the list of projects
+  } catch (err) {
+    res.status(500).json({ message: "Error fetching projects", error: err.message });
+  }
+};
