@@ -7,7 +7,6 @@ import cors from "cors";
 import mainRouter from "./src/routes/indexRouter.js";
 
 dotenv.config();
-const app = express();
 
 // environment variables
 const port = process.env.PORT || 3000;
@@ -17,13 +16,15 @@ const dbName = process.env.DB_NAME;
 
 // Define CORS options
 const corsOptions = {
-  origin: ["http://localhost:5173", "https://elisa-dev-portfolio.vercel.app","https://dtechel.web.app/"],
+  origin: "*", // Accept requests from any origin
   optionsSuccessStatus: 200,
-  credentials: true,
+  credentials: true, // Allow cookies & authentication headers
 };
 
+const app = express();
 // Use CORS middleware with options
 app.use(cors(corsOptions));
+
 
 // Database connection
 const dbUri = `mongodb+srv://${dbUser}:${dbPass}@cluster0.hex2mmr.mongodb.net/${dbName}?retryWrites=true&w=majority`;
