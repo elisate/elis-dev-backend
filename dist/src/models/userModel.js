@@ -1,0 +1,67 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+var _mongoose = _interopRequireDefault(require("mongoose"));
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
+var userSchema = _mongoose["default"].Schema({
+  firstname: {
+    type: String,
+    required: true
+  },
+  lastname: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  password: {
+    type: String,
+    required: true
+  },
+  gender: {
+    type: String,
+    required: false
+  },
+  role: {
+    type: String,
+    required: false,
+    "enum": ["Admin", "user"],
+    "default": "user"
+  },
+  tokens: {
+    accessToken: {
+      type: String
+    }
+  },
+  verified: {
+    type: Boolean,
+    required: false
+  },
+  newPassword: {
+    type: String,
+    required: false,
+    select: false
+  },
+  otp: {
+    type: String,
+    required: false
+  },
+  resetPasswordToken: {
+    type: String,
+    required: false
+  },
+  resetPasswordExpires: {
+    type: Date,
+    required: false
+  }
+}, {
+  timestamps: true
+});
+var User = _mongoose["default"].model("User", userSchema);
+var _default = exports["default"] = User;
