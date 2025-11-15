@@ -4,7 +4,7 @@ import User from "../models/userModel.js";
 import dotenv from "dotenv";
 import {
   generateAccessToken,
-  generateRefreshToken,
+
 } from "../../utils/generateUserTokens.js";
 dotenv.config();
 
@@ -38,8 +38,7 @@ export const register = async (req, res) => {
     });
 
     user.tokens.accessToken = generateAccessToken(user);
-    user.tokens.refreshToken = generateRefreshToken(user);
-
+  
     await user.save();
     res.status(201).json({
       message: "Account created successfully!",
@@ -47,7 +46,7 @@ export const register = async (req, res) => {
         ...user.toObject(),
         tokens: {
           accessToken: user.tokens.accessToken,
-          refreshToken: user.tokens.refreshToken,
+          
         },
       },
     });
@@ -57,6 +56,7 @@ export const register = async (req, res) => {
       .json({ message: "Failed to register user", error: error.message });
   }
 };
+
 
 export const login = async (req, res) => {
   try {

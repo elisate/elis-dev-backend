@@ -3,25 +3,25 @@ import { CloudinaryStorage } from "multer-storage-cloudinary";
 import multer from "multer";
 
 // Configure Cloudinary storage for different types of files
-const storage = new CloudinaryStorage({
-  cloudinary: cloudinary,
-  params: (req, file) => {
-    let folder;
-    if (file.fieldname === "videos") {
-      folder = "videos";
-    } else if (file.fieldname === "documents") {
-      folder = "documents";
-    } else if (file.fieldname === "images") {
-      folder = "images";
-    }
+// const storage = new CloudinaryStorage({
+//   cloudinary: cloudinary,
+//   params: (req, file) => {
+//     let folder;
+//     if (file.fieldname === "videos") {
+//       folder = "videos";
+//     } else if (file.fieldname === "documents") {
+//       folder = "documents";
+//     } else if (file.fieldname === "images") {
+//       folder = "images";
+//     }
 
-    return {
-      folder: folder, // The folder in Cloudinary where files will be uploaded
-      resource_type: "auto", // This tells Cloudinary to automatically detect file type (video, image, etc.)
-      public_id: `${Date.now()}-${file.originalname.split(".")[0]}`, // Custom file name
-    };
-  },
-});
+//     return {
+//       folder: folder, // The folder in Cloudinary where files will be uploaded
+//       resource_type: "auto", // This tells Cloudinary to automatically detect file type (video, image, etc.)
+//       public_id: `${Date.now()}-${file.originalname.split(".")[0]}`, // Custom file name
+//     };
+//   },
+// });
 
 const configureMulter = () => {
   const upload = multer({

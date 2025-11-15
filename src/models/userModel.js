@@ -35,7 +35,6 @@ const userSchema = mongoose.Schema(
 
     tokens: {
       accessToken: { type: String },
-      refreshToken: { type: String },
     },
     verified: { type: Boolean, required: false },
     newPassword: {
