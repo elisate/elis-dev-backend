@@ -20,7 +20,8 @@ function _OverloadYield(e, d) { this.v = e, this.k = d; }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
 function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
 _dotenv["default"].config();
-// Create a Nodemailer transporter
+
+// Create a reusable Nodemailer transporter
 var transporter = _nodemailer["default"].createTransport({
   service: "gmail",
   auth: {
@@ -28,40 +29,45 @@ var transporter = _nodemailer["default"].createTransport({
     pass: process.env.EMAIL_PASS
   },
   tls: {
-    rejectUnauthorized: false
+    rejectUnauthorized: false // Allows self-signed certificates
   }
 });
 
-// Function to send email
+/**
+ * Sends an email using Nodemailer
+ * @param {string} to - Recipient email address
+ * @param {string} subject - Email subject
+ * @param {string} htmlContent - Email content in HTML
+ * @returns {Promise<boolean>} - Returns true if email sent successfully, false otherwise
+ */
 var sendEmail = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(to, subject, htmlContent) {
     var mailOptions;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
-          _context.prev = 0;
-          // Email configuration
           mailOptions = {
             from: process.env.EMAIL_USER,
             to: to,
             subject: subject,
-            html: htmlContent // Use 'html' instead of 'text' for HTML content
-          }; // Send email
+            html: htmlContent
+          };
+          _context.prev = 1;
           _context.next = 4;
           return transporter.sendMail(mailOptions);
         case 4:
-          console.log("Email sent successfully.");
+          console.log("Email sent successfully to: ".concat(to));
           return _context.abrupt("return", true);
         case 8:
           _context.prev = 8;
-          _context.t0 = _context["catch"](0);
-          console.log("Error sending email: ", _context.t0.message);
+          _context.t0 = _context["catch"](1);
+          console.error("Error sending email to ".concat(to, ":"), _context.t0.message);
           return _context.abrupt("return", false);
         case 12:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[0, 8]]);
+    }, _callee, null, [[1, 8]]);
   }));
   return function sendEmail(_x, _x2, _x3) {
     return _ref.apply(this, arguments);
