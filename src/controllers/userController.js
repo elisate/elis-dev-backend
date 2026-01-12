@@ -4,6 +4,7 @@ import User from "../models/userModel.js";
 import dotenv from "dotenv";
 import {
   generateAccessToken,
+  generateRefreshToken
 
 } from "../../utils/generateUserTokens.js";
 dotenv.config();

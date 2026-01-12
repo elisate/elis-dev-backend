@@ -11,4 +11,11 @@ export const generateAccessToken = (user) => {
   );
 };
 
-
+// ✅ ADD THIS ONLY
+export const generateRefreshToken = (user) => {
+  return jwt.sign(
+    { _id: user._id, email: user.email },
+    process.env.JWT_SECRET,
+    { expiresIn: "7d" }
+  );
+};
